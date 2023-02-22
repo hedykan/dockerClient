@@ -16,6 +16,16 @@ func main() {
 	cmdArr := strings.Split(*cmdStr, " ")
 
 	httpc := udsClient.NewClient(sockAddr, socketUrl)
-	execId := httpc.CreateExec(*container, cmdArr)
+	execId := httpc.CreateExec(*container, cmdFormat(cmdArr))
 	httpc.StartExec(execId)
+}
+
+func cmdFormat(str []string) []string {
+	var res []string
+	for _, v := range str {
+		if v != "" {
+			res = append(res, v)
+		}
+	}
+	return res
 }
